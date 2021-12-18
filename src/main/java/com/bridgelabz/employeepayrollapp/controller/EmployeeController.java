@@ -1,7 +1,7 @@
 package com.bridgelabz.employeepayrollapp.controller;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.entity.EmployeeEntity;
+import com.bridgelabz.employeepayrollapp.entity.Employee;
 import com.bridgelabz.employeepayrollapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping(value = "/list-all-employee")
-    public List<EmployeeEntity> getAllEmployee(){
+    public List<Employee> getAllEmployee(){
         return employeeService.getAllEmployee();
     }
 

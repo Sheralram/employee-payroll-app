@@ -1,8 +1,8 @@
 package com.bridgelabz.employeepayrollapp.service;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeeDto;
-import com.bridgelabz.employeepayrollapp.entity.EmployeeEntity;
-import com.bridgelabz.employeepayrollapp.exception.EmployeeServiceException;
+import com.bridgelabz.employeepayrollapp.entity.Employee;
+import com.bridgelabz.employeepayrollapp.exception.NoDataFoundException;
 import com.bridgelabz.employeepayrollapp.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,34 +23,34 @@ public class EmployeeService {
     ModelMapper modelmapper;
 
 
-    public List<EmployeeEntity> getAllEmployee() {
+    public List<Employee> getAllEmployee() {
         return employeeRepository.findAll();
     }
 
     public String addEmployee(EmployeeDto employeeDto) {
-        EmployeeEntity employeeEntity = modelmapper.map(employeeDto, EmployeeEntity.class);
+        Employee employeeEntity = modelmapper.map(employeeDto, Employee.class);
         employeeRepository.save(employeeEntity);
         return EMPLOYEE_ADDED_SUCCESSULLY;
 
     }
 
-    public String updateEmployee(int id, EmployeeDto employeeDto) throws EmployeeServiceException {
-        Optional<EmployeeEntity>employeeEntityOptional = employeeRepository.findById(id);
+    public String updateEmployee(int id, EmployeeDto employeeDto) throws NoDataFoundException {
+        Optional<Employee>employeeEntityOptional = employeeRepository.findById(id);
         if(employeeEntityOptional.isPresent()){
-            EmployeeEntity employeeEntity = new EmployeeEntity();
+            Employee employeeEntity = new Employee();
             modelmapper.map(employeeDto, employeeEntity);
             employeeRepository.save(employeeEntity);
             return EMPLOYEE_UPDATED_SUCCESSULLY;
         }
-        throw new EmployeeServiceException("Employee record does not find by id : " +id);
+        throw new NoDataFoundException("Employee record does not find by id : " +id);
     }
 
     public String deleteEmployee(int id) {
-        Optional<EmployeeEntity>employeeEntity = employeeRepository.findById(id);
+        Optional<Employee>employeeEntity = employeeRepository.findById(id);
                 if(employeeEntity.isPresent()){
                     employeeRepository.delete(employeeEntity.get());
                     return EMPLOYEE_DELETED_SUCCESSULLY;
                 }
-                throw new EmployeeServiceException("Employee record does not deleted by given id : "+id);
+                throw new NoDataFoundException("Employee record does not deleted by given id : "+id);
     }
 }
