@@ -26,7 +26,7 @@ public class EmployeeController {
         return new ResponseEntity<ResponseDto>(responseDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<String> addEmployeePayrollData(
             @RequestBody EmployeeDto employeePayrollDto) {
         String employeePayRollData = employeeService.addEmployee(employeePayrollDto);
