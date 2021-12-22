@@ -3,6 +3,13 @@ package com.bridgelabz.employeepayrollapp.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+/**
+ * Purpose : To demonstrate all the fields of employee in the entity databse format
+ *
+ * @author : Ramkrishna Sheral
+ * @version : 0.0.1
+ * @since : 15-12-2021
+ */
 
 @Entity
 @Table(name = "employee")
