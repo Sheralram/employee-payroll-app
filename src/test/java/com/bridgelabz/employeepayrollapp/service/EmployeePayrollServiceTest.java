@@ -55,7 +55,6 @@ public class EmployeePayrollServiceTest {
         employee2.setSalary((long) 55985.65);
         employee2.setJoiningDate("15/05/2021");
         employee2.setNotes("Regular");
-
         employeeList.add(employee2);
 
         when(employeeRepository.findAll()).thenReturn(employeeList);

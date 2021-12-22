@@ -8,14 +8,32 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+/**
+ * Purpose : Implement AOP to handle logging mechanism so than dry principle will not be affected
+ *
+ * @author : Ramkrishna Sheral
+ * @version : 0.0.1
+ * @since : 15-12-2021
+ */
 @Aspect
 @Component
 @Slf4j
 public class LoggingAdvice {
+
+    /**
+     * Purpose : This method is used to apply the PointCut(logging mechanism) around the whole application
+     */
     @Pointcut(value="execution(* com.bridgelabz.employeepayrollapp.*.*.*(..) )")
     public void myPointCut() {
 
     }
+    /**
+     * Purpose : This method is used to define the source methods and class to invoke log and also getting response after logging execution
+     *
+     * @param : the  proceeding Join Point to access the logging mechanism
+     * @return the response after execution of log
+     * @throws Throwable throws an exception if occurred
+     */
 
     @Around("myPointCut()")
     public Object applicationLogger(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
